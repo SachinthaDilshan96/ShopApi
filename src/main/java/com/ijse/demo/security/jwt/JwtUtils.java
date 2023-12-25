@@ -13,9 +13,9 @@ import java.util.Date;
 
 @Component
 public class JwtUtils {
-    @Value("$(app.secret)")
+    @Value("${app.secret}")
     private String jwtSecret;
-    @Value("$(app.jwtExpiration)")
+    @Value("${app.jwtExpiration}")
     private int jwtExpiration;
     private Key key(){
         return Keys.hmacShaKeyFor(Decoders.BASE64.decode(jwtSecret));
@@ -27,7 +27,7 @@ public class JwtUtils {
                 .setSubject(userDetails.getUsername())
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(new Date().getTime()+jwtExpiration))
-                .signWith(key(), SignatureAlgorithm.ES256)
+                .signWith(key(), SignatureAlgorithm.HS256)
                 .compact();
     }
 
