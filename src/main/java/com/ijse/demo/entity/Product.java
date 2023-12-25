@@ -3,6 +3,9 @@ package com.ijse.demo.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 @Getter
 @Setter
@@ -20,4 +23,6 @@ public class Product {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "category_id")
     private Category category;
+    @ManyToMany(mappedBy = "products")
+    private Set<Order> orders = new HashSet<>();
 }

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "*")
 public class CategoryController {
     @Autowired
     private CategoryService categoryService;
@@ -28,7 +29,7 @@ public class CategoryController {
     }
 
     @GetMapping("/categories/{id}")
-    public Category findCategoryById(Long id){
+    public Category findCategoryById(@PathVariable Long id){
         return categoryService.getCategoryById(id);
     }
 }
